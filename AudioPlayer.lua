@@ -11,15 +11,23 @@ function AudioPlayer:play(name)
     if self.sounds[name] then
         self.sounds[name]:stop()
         self.sounds[name]:play()
-    else
-        print('No sound found with name "'.. name.. '"')    
     end
 end
 
 function AudioPlayer:stop(name)
     if self.sounds[name] then
         self.sounds[name]:stop()
-    else
-        print('No sound found with name "'.. name.. '"')
+    end
+end
+
+function AudioPlayer:pause(name)
+    if self.sounds[name] then
+        self.sounds[name]:pause()
+    end
+end
+
+function AudioPlayer:resume(name)
+    if self.sounds[name] then
+        self.sounds[name]:play()
     end
 end

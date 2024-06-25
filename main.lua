@@ -36,6 +36,7 @@ end
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     love.window.setTitle('Yiggity Bird')
+    isGamePaused = false
 
     smallFont = love.graphics.newFont('fonts/font.ttf', 8)
     mediumFont = love.graphics.newFont('fonts/flappy.ttf', 14)
@@ -79,6 +80,18 @@ function love.keypressed(key)
     if key == "escape" then  -- Fixed the escape key check
         love.event.quit()
     end
+
+    if key == "p" and gStateMachine:getCurrentStateName() == 'play' then
+        if not isGamePaused then
+            AudioPlayer:pause("soundtrack")
+            gStateMachine:pause()
+            isGamePaused = true
+        else
+            AudioPlayer:resume("soundtrack")
+            gStateMachine:resume()
+            isGamePaused = false
+        end
+    end
 end
 
 function love.keyboard.wasPressed(key) 
@@ -90,6 +103,8 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
+    if isGamePaused then return end
+
     backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % LOOPBACK_POINT
     groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
 

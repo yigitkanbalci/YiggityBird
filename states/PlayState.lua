@@ -16,9 +16,13 @@ function PlayState:init()
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
 
     self.score = 0
+    self.paused = false
 end
 
 function PlayState:update(dt)
+    if self.paused then return end
+
+
     self.timer = self.timer + dt
 
     if self.timer > 2 then
@@ -77,4 +81,17 @@ function PlayState:render()
     love.graphics.setFont(flappyFont)
     love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
     self.bird:render()
+
+    if self.paused then
+        love.graphics.setFont(flappyFont)
+        love.graphics.printf('Paused...', 0, 64, VIRTUAL_WIDTH, "center")
+    end
+end
+
+function PlayState:pause()
+    self.paused = true
+end
+
+function PlayState:resume()
+    self.paused = false
 end
