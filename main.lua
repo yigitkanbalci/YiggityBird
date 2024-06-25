@@ -60,6 +60,7 @@ function love.load()
         ['flap'] = "Sounds/Jump.wav",
         ['crash'] = "Sounds/Death.wav",
         ['countdown'] = "Sounds/Countdown.wav",
+        ['soundtrack'] = "Sounds/retro_game.wav",
     }
 
     AudioPlayer = AudioPlayer(sounds)
