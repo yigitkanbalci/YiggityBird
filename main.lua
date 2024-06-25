@@ -9,6 +9,8 @@ require "states/BaseState"
 require "states/PlayState"
 require "states/TitleScreenState"
 require "states/ScoreState"
+require "states/CountdownState"
+require "AudioPlayer"
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -50,7 +52,17 @@ function love.load()
         ['title'] = function() return TitleScreenState() end,
         ['play'] = function() return PlayState() end,
         ['score'] = function() return ScoreState() end,
+        ['countdown'] = function() return CountdownState() end,
     }
+
+    sounds = {
+        ['score'] = "Sounds/Score.wav",
+        ['flap'] = "Sounds/Jump.wav",
+        ['crash'] = "Sounds/Death.wav",
+        ['countdown'] = "Sounds/Countdown.wav",
+    }
+
+    AudioPlayer = AudioPlayer(sounds)
 
     gStateMachine:change('title')
 

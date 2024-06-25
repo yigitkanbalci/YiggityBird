@@ -20,6 +20,7 @@ end
 function Bird:update(dt)
     self.dy = self.dy + GRAVITY * dt
     if love.keyboard.wasPressed('space') then
+        AudioPlayer:play("flap")
         self.dy = -5
     end
 
@@ -27,8 +28,8 @@ function Bird:update(dt)
 end
 
 function Bird:collides(pipe)
-    if (self.x + 2) + (self.width - 4) >= pipe.x and self.x + 2 <= pipe.x + pipe.width then
-        if (self.y + 2) + (self.height - 4) >= pipe.y and self.y + 2 <= pipe.y + pipe.height then
+    if (self.x + 3) + (self.width - 5) >= pipe.x and self.x + 3 <= pipe.x + pipe.width then
+        if (self.y + 3) + (self.height - 5) >= pipe.y and self.y + 3 <= pipe.y + pipe.height then
             return true
         end
     end
