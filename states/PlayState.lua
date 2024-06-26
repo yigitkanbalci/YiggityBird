@@ -24,11 +24,15 @@ function PlayState:update(dt)
 
 
     self.timer = self.timer + dt
+    local difficultyFactor = math.min(5, math.floor(self.score / 5) + 1)
+    if self.timer > math.random(5 - difficultyFactor, 5) then
+        local newY = self.lastY + math.random(-30, 20 * difficultyFactor)
 
-    if self.timer > 2 then
-        local y = math.max(-PIPE_HEIGHT + 10, math.min(self.lastY + math.random(-30, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
-        self.lastY = y
-        table.insert(self.pipePairs, PipePair(y))
+        newY = math.max(-PIPE_HEIGHT + 10, newY)
+        newY = math.min(VIRTUAL_HEIGHT - math.random(70, 150) - PIPE_HEIGHT, newY)
+
+        self.lastY = newY
+        table.insert(self.pipePairs, PipePair(newY))
         self.timer = 0
     end
 

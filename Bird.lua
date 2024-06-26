@@ -28,8 +28,10 @@ function Bird:update(dt)
 end
 
 function Bird:collides(pipe)
-    if (self.x + 3) + (self.width - 5) >= pipe.x and self.x + 3 <= pipe.x + pipe.width then
-        if (self.y + 3) + (self.height - 5) >= pipe.y and self.y + 3 <= pipe.y + pipe.height then
+    local buffer = 10
+
+    if (self.x + buffer) + (self.width - 2 * buffer) >= pipe.x and self.x + buffer <= pipe.x + pipe.width then
+        if (self.y + buffer) + (self.height - 2 * buffer) >= pipe.y and self.y + buffer <= pipe.y + pipe.height then
             return true
         end
     end
